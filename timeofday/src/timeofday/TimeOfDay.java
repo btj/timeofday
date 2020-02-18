@@ -19,16 +19,26 @@ public class TimeOfDay {
 	/**
 	 * Initializes this object with the given hours and minutes.
 	 * 
-	 * @pre The given hours are between 0 and 23
-	 *    | 0 <= hours && hours <= 23
-	 * @pre The given minutes are between 0 and 59
-	 *    | 0 <= minutes && minutes <= 59
 	 * @post This object's hours equal the given hours
-	 *    | getHours() == hours
+	 *    | 0 <= hours && hours <= 23 ?
+	 *    |     getHours() == hours
+	 *    | :
+	 *    |     hours < 0 ? getHours() == 0 : getHours() == 23 
 	 * @post This object's minutes equal the given minutes
-	 *    | getMinutes() == minutes
+	 *    | 0 <= minutes && minutes <= 59 ?
+	 *    |     getMinutes() == minutes
+	 *    | :
+	 *    |     minutes < 0 ? getMinutes() == 0 : getMinutes() == 59
 	 */
 	public TimeOfDay(int hours, int minutes) {
+		if (hours < 0)
+			hours = 0;
+		else if (hours > 23)
+			hours = 23;
+		if (minutes < 0)
+			minutes = 0;
+		else if (minutes > 59)
+			minutes = 59;
 		minutesSinceMidnight = 60 * hours + minutes;
 	}
 
