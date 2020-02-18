@@ -20,25 +20,21 @@ public class TimeOfDay {
 	 * Initializes this object with the given hours and minutes.
 	 * 
 	 * @post This object's hours equal the given hours
-	 *    | 0 <= hours && hours <= 23 ?
-	 *    |     getHours() == hours
-	 *    | :
-	 *    |     hours < 0 ? getHours() == 0 : getHours() == 23 
+	 *    | getHours() == hours
 	 * @post This object's minutes equal the given minutes
-	 *    | 0 <= minutes && minutes <= 59 ?
-	 *    |     getMinutes() == minutes
-	 *    | :
-	 *    |     minutes < 0 ? getMinutes() == 0 : getMinutes() == 59
+	 *    | getMinutes() == minutes
+	 * @throws IllegalArgumentException
+	 *      The given hours are less than 0 or greater than 23
+	 *    | !(0 <= hours && hours <= 23)
+	 * @throws IllegalArgumentException
+	 *      The given minutes are less than 0 or greare than 59
+	 *    | !(0 <= minutes && minutes <= 59)
 	 */
 	public TimeOfDay(int hours, int minutes) {
-		if (hours < 0)
-			hours = 0;
-		else if (hours > 23)
-			hours = 23;
-		if (minutes < 0)
-			minutes = 0;
-		else if (minutes > 59)
-			minutes = 59;
+		if (!(0 <= hours && hours <= 23))
+			throw new IllegalArgumentException("hours out of range");
+		if (!(0 <= minutes && minutes <= 59))
+			throw new IllegalArgumentException("minutes out of range");
 		minutesSinceMidnight = 60 * hours + minutes;
 	}
 
