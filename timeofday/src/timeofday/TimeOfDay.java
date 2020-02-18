@@ -3,22 +3,21 @@ package timeofday;
 class TimeOfDay {
 	int minutesSinceMidnight;
 
-	static int getHours(TimeOfDay t) {
-		return t.minutesSinceMidnight / 60;
+	int getHours() {
+		return this.minutesSinceMidnight / 60;
 	}
 
-	static int getMinutes(TimeOfDay t) {
-		return t.minutesSinceMidnight % 60;
+	int getMinutes() {
+		return this.minutesSinceMidnight % 60;
 	}
 
-	static void setHours(TimeOfDay t, int value) {
-		// t.minutesSinceMidnight = t.minutesSinceMidnight % 60;
-		t.minutesSinceMidnight %= 60;
-		t.minutesSinceMidnight += value * 60;
+	void setHours(int value) {
+		this.minutesSinceMidnight %= 60;
+		this.minutesSinceMidnight += value * 60;
 	}
 
-	static void setMinutes(TimeOfDay t, int value) {
-		t.minutesSinceMidnight = t.minutesSinceMidnight / 60 * 60 + value;
+	void setMinutes(int value) {
+		this.minutesSinceMidnight = this.minutesSinceMidnight / 60 * 60 + value;
 	}
 
 }
