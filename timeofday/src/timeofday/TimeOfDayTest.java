@@ -7,24 +7,25 @@ import org.junit.jupiter.api.Test;
 class TimeOfDayTest {
 	
 	class TimeOfDay {
-		int hours;
-		int minutes;
+		int minutesSinceMidnight;
 	}
 	
 	int getHours(TimeOfDay t) {
-		return t.hours;
+		return t.minutesSinceMidnight / 60;
 	}
 	
 	int getMinutes(TimeOfDay t) {
-		return t.minutes;
+		return t.minutesSinceMidnight % 60;
 	}
 	
 	void setHours(TimeOfDay t, int value) {
-		t.hours = value;
+		// t.minutesSinceMidnight = t.minutesSinceMidnight % 60;
+		t.minutesSinceMidnight %= 60;
+		t.minutesSinceMidnight += value * 60;
 	}
 	
 	void setMinutes(TimeOfDay t, int value) {
-		t.minutes = value;
+		t.minutesSinceMidnight = t.minutesSinceMidnight / 60 * 60 + value;
 	}
 
 	@Test
@@ -32,7 +33,8 @@ class TimeOfDayTest {
 		TimeOfDay t = new TimeOfDay();
 		assert getHours(t) == 0 && getMinutes(t) == 0;
 		setHours(t, getHours(t) + 12);
-		assert getHours(t) == 12 && getMinutes(t) == 0;		
+		setMinutes(t, 15);
+		assert getHours(t) == 12 && getMinutes(t) == 15;	
 	}
 
 }
